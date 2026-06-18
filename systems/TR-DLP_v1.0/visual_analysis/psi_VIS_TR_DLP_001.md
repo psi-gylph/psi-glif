@@ -1,4 +1,3 @@
-cat > systems/TR-DLP_v1.0/visual_analysis/psi_VIS_TR_DLP_001.md <<'MD'
 # ψ-Visual Analysis Report — TR-DLP
 
 ## Manifestation

@@ -1,0 +1,26 @@
+{
+  "id": "ψ-VIS_TR-DLP_001",
+  "title": "TR-DLP NETWORK (LRL/DCJ ARCHITECTURE)",
+  "type": "historical_visualization",
+  "era": "TR-DLP",
+  "status": "archived",
+  "format": "mp4",
+
+  "role": "foundational_fossil_layer",
+
+  "lineage": [
+    "TR-DLP",
+    "Metarealism",
+    "Glyph",
+    "Hypercore",
+    "Data Vault",
+    "NFT"
+  ],
+
+  "classification": {
+    "symbolic_state": "pre-symbolic",
+    "execution_state": "non-executable",
+    "market_state": "non-mintable",
+    "archive_state": "preserved"
+  }
+}
