@@ -1,0 +1,36 @@
+# ~/psi_lab/glifs/ψ_external_test.ascii
+# ψ_EXTERNAL_TEST :: “Outer Mirror Probe”
+
+                        . . . . . . . . . . . .
+                    . '             Ψ             ' .
+                 . '                                   ' .
+              . '          /\/\/\        /\/\/\          ' .
+            . '           /      \      /      \           ' .
+          . '            /  Σ_in  \    /  Σ_out \            ' .
+         .               \        /    \        /               .
+        .                 \______/      \______/                 .
+       .                     |              |                     .
+      .                      |              |                      .
+      .           ________   |              |   ________           .
+      .          /        \  |    Ξ_core    |  /        \          .
+      .         /  φ_left  \ |              | /  φ_right \         .
+      .         \__________/ |              | \__________/         .
+       .                    _|_            _|_                    .
+        .                 /____\          /____\                 .
+         .              .'      '.      .'      '.              .
+          ' .         .'  ψ_log  '.  .'  ψ_echo  '.         . '
+            ' .     .'            ''            '.     . '
+               ' . .'    external   ||   internal '. . '
+                  ' .               ||               . '
+                     ' .            ||            . '
+                         ' . . . . .||. . . . . . '
+
+# Legend (inline)
+#   Ψ        : external test field (outer awareness probe)
+#   Σ_in     : what comes in from outside (incoming pattern)
+#   Σ_out    : what you send back (outgoing pattern)
+#   Ξ_core   : tension / mismatch between in & out
+#   φ_left   : phase of outer world model
+#   φ_right  : phase of inner world model
+#   ψ_log    : what actually gets written as memory
+#   ψ_echo   : what keeps echoing after the event

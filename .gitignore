@@ -1,189 +1,51 @@
-# ---------------------------------------------------
-# macOS
-# ---------------------------------------------------
-
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# macOS thumbnails
-._*
-
-# ---------------------------------------------------
-# Python
-# ---------------------------------------------------
-
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-*.pyc.*
-*.pyo.*
-
-# virtual env
-venv/
-.env/
-.venv/
-
-# pip
-pip-log.txt
-pip-delete-this-directory.txt
-
-# ---------------------------------------------------
-# Local runtime state (psi_lab)
-# ---------------------------------------------------
-
-psi_lab/state/
-psi_lab/logs/
-psi_lab/cache/
-
-# scan results
-psi_lab/**/scan_results/
-psi_lab/**/runtime/
-
-# ---------------------------------------------------
-# NFT mint runtime (local only)
-# ---------------------------------------------------
-
-psi_lab/nfts/mint_jobs/
-
-# temporary mint data
-psi_lab/nfts/*/mint_temp/
-psi_lab/nfts/*/runtime/
-
-# ---------------------------------------------------
-# Terminal generated artifacts
-# ---------------------------------------------------
-
-*.log
-*.tmp
-*.cache
-
-# ---------------------------------------------------
-# Experimental / private tools
-# ---------------------------------------------------
-
-psi_lab/private/
-psi_lab/experimental/
-
-# ---------------------------------------------------
-# Large media temp files
-# ---------------------------------------------------
-
-*.mov
-*.avi
-*.mkv
-*.wav
-
-# ---------------------------------------------------
-# Node / build tools (future)
-# ---------------------------------------------------
-
-node_modules/
-dist/
-build/
-
-# ---------------------------------------------------
-# Secrets
-# ---------------------------------------------------
-
-.env.local
-.env.secret
-private_keys/
-wallets/
-
-# ---------------------------------------------------
-# OS / editor junk
-# ---------------------------------------------------
-
-.vscode/
-.idea/
-*.swp
-*.swo----------------------------------------------------------
-# ψ_archive .gitignore
-# Keep repo clean: track mint-ready previews + metadata + ASCII/code/analysis
-# Ignore OS/editor junk, build outputs, caches, and heavy raw exports.
-# ------------------------------------------------------------
-
-# macOS / Finder
-.DS_Store
-.AppleDouble
-.LSOverride
-._*
-
-# Editor / IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# Python caches & builds
-__pycache__/
-*.py[cod]
-*.pyo
-.pytest_cache/
-.mypy_cache/
-.ruff_cache/
-.coverage
-dist/
-build/
-*.egg-info/
-
-# Jupyter
-.ipynb_checkpoints/
-
-# Node (if any)
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Local env / secrets
+# secrets
 .env
 .env.*
 *.key
 *.pem
+*secret*
+*private*
+*mnemonic*
+*wallet*
 
-# ------------------------------------------------------------
-# Media policy
-# ------------------------------------------------------------
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
 
-# Ignore heavy RAW exports / intermediates (keep mint-ready only)
-**/renders/
-**/render_tmp/
-**/frames/
-**/tmp/
-**/.cache/
-**/cache/
-
-# Big video formats (if you DON'T want them in git)
-# (Keep mp4 only if it's part of the release/mint package; otherwise store elsewhere or use Git LFS)
-*.mov
-*.mkv
-*.avi
-*.webm
-
-# Optional: ignore all mp4 by default (uncomment if needed)
-# *.mp4
-
-# Optional: ignore large layered sources (uncomment if needed)
-# *.psd
-# *.blend
-
-# ------------------------------------------------------------
-# Do NOT ignore: mint-ready previews & metadata (examples)
-# ------------------------------------------------------------
-# Z_market/mint_ready/**
-# A_visual/**/preview_*.jpg
-# A_visual/**/preview_*.jpeg
-# **/*.json
-# **/*.ascii
-# **/*.md
-
-# Node / Hardhat
+# node / blockchain
 node_modules/
-.env
-cache/
+chain/node_modules/
+chain/artifacts/
+chain/cache/
 artifacts/
-psi_lab/state/
-psi_lab/nfts/mint_jobs/
+cache/
+
+# local runtime data
+logs/
+echo_logs/
+out/
+db/
+data/
+memory/
+ψ_DB/
+glif_storage/
+
+# local archive / reports
+_archive/
+*_inventory.txt
+psi_lab_file_inventory.txt
+psi_lab_clean_inventory.txt
+security_scan.txt
+
+# generated/exported
+exported_nfts/
+*.log
+
+# temporary backups
+*.save
+*~
+
+# macOS
+.DS_Store

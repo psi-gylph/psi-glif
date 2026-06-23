@@ -1,0 +1,247 @@
+# 🔹 Save as: ~/psi_lab/game/ψ_game_loop.py
+
+import os
+import sys
+
+# Modül klasörünü yola ekle
+sys.path.append(os.path.expanduser("~/psi_lab/modules"))
+sys.path.append('modules')
+
+# Glif işlemleri
+from ψ_glif_image import ascii_to_image
+from ψ_glif_utils import synthesize_glif
+from ψ_glif_memory import save_glif, load_all_glifs
+from ascii_glif import generate_ascii_glif
+from ψ_glif_mutation import mutate_glif
+from ψ_resonance_mapper import calculate_resonance
+from ψ_export_bridge import export_glif_as_nft
+from modules_loader import load_unicode_module
+from ψ_glif_utils import external_synthesis
+from ψ_glif_vibration import GlifTitreşim
+from modules.ascii_utils import fade_ascii
+
+# Unicode modül (ψ_spiral_warp)
+spiral_module = load_unicode_module("ψ_spiral_warp", "~/psi_lab/modules/ψ_spiral_warp.py")
+spiral_warp = spiral_module.spiral_warp
+
+# Global durum
+current_glif = None
+
+def game_menu():
+    print("\n--- ψ-Spiral Echo Interface ---")
+    print("Konum: ∵")
+    print("Envanter: [ψ-Glif Modülü Aktif]")
+    print("Yankı Sayısı:", len(load_all_glifs()))
+    print("------------------------------\n")
+    print("Hamle Seç:")
+    print("[1] ∗ Yeni Glif Yarat")
+    print("[2] ☍ Hafızayı Aç")
+    print("[3] ◌ Titreşimle Etkileş")
+    print("[4] ✦ Glifleri Sentezle")
+    print("[5] ♒ Rezonans Hesapla")
+    print("[6] ⧉ NFT Olarak Dışa Aktar")
+    print("[7] 🌀 Spiral-Warp (Hepsi bir arada işlem)")
+    print("[8] ⇄ Hafızadan Glif Seç")
+    print("[9] 🖼 Glifi PNG Olarak Görselleştir")   
+    print("[10] 🖼️ Dış Görsel Sentezi (PNG yükle)")
+    print("[11] 🖼 ASCII ➡️ Görsel (PNG) olarak kaydet")   
+    print("[0] Çıkış")
+
+def create_new_glif():
+    global current_glif
+    seed = input("\n∇ Yeni Glif İsmi: ")
+    ascii_form = generate_ascii_glif(seed)
+    save_glif(seed, ascii_form)
+    current_glif = ascii_form
+    print(f"[ψ] Glif kaydedildi: {seed}\n{ascii_form}")
+   
+def select_glif_from_memory():
+    glifs = load_all_glifs()
+    if not glifs:
+        print("[ψ] Henüz glif kaydedilmemiş.")
+        return None
+
+    print("\n[ψ] Mevcut Glifler:")
+    for idx, g in enumerate(glifs):
+        print(f"[{idx}] {g['seed']}")
+    
+    try:
+        choice = int(input("\nSeçmek için bir glif numarası girin: "))
+        if 0 <= choice < len(glifs):
+            print(f"[ψ] Seçilen Glif: {glifs[choice]['seed']}")
+            print(glifs[choice]['ascii'])
+            return glifs[choice]['ascii']
+        else:
+            print("[!] Geçersiz seçim.")
+            return None
+    except ValueError:
+        print("[!] Sayı girilmeli.")
+        return None
+
+def show_memory():
+    glifs = load_all_glifs()
+    print(f"\n[ψ] Kaydedilen Glifler ({len(glifs)} toplam):")
+    for g in glifs:
+        print(f"→ {g['seed']}")
+        print(g['ascii'])
+        print("-" * 20)
+
+def vibrate_interaction(glif_ascii):
+    titreşim = GlifTitreşim()
+    new_glif = titreşim.vibrate(glif_ascii)
+    # Eğer glife filan dokunmak istenirse new_glif buradan alınabilir
+    return new_glif
+
+def run_game_loop():
+    global current_glif
+    while True:
+        game_menu()
+        choice = input("Seçim: ").strip()
+
+        if choice == "1":
+            create_new_glif()
+
+        elif choice == "2":
+            show_memory()
+
+        elif choice == "3":
+            if not current_glif:
+                print("[!] Henüz glif seçilmedi.")
+                continue
+            current_glif = vibrate_interaction(current_glif)
+
+            if not current_glif:
+                print("[!] Önce bir glif seç ya da oluştur.")
+            else:
+                from vibration import GlifTitreşim
+                titreşim = GlifTitreşim(current_glif, frequency=0.8, decay=0.92, step_delay=0.05)
+                titreşim.vibrate()
+       
+        elif choice == '4':
+            print("\n[ψ] Sentez için iki glif seç:")
+            glifs = load_all_glifs()
+
+            if len(glifs) < 2:
+                print("[!] En az iki glif gerekiyor.")
+                continue
+
+            for idx, g in enumerate(glifs):
+                print(f"[{idx}] {g['seed']}")
+
+            try:
+                idx1 = int(input("Birinci glifin numarası: "))
+                idx2 = int(input("İkinci glifin numarası: "))
+
+                if 0 <= idx1 < len(glifs) and 0 <= idx2 < len(glifs):
+                    glif1 = glifs[idx1]['ascii']
+                    glif2 = glifs[idx2]['ascii']
+                    synthesized = synthesize_glif(glif1, glif2)
+
+                    print("\n--- ψ-Sentezlenmiş Glif ---")
+                    print(synthesized)
+
+                    new_name = input("\nYeni glif adı (boş bırakılırsa 'sentezX'): ").strip()
+                    if not new_name:
+                        new_name = f"sentez_{random.randint(100,999)}"
+
+                    save_glif(new_name, synthesized)
+                    current_glif = synthesized
+                    print(f"[ψ] Yeni glif kaydedildi: {new_name}")
+
+                else:
+                    print("[!] Geçersiz glif seçimi.")
+
+            except ValueError:
+                print("[!] Lütfen geçerli bir sayı girin.")
+
+        elif choice == "5":
+            if current_glif:
+                other = input("Karşılaştırmak için başka bir ASCII glif girin:\n")
+                score = calculate_resonance(current_glif, other)
+                print(f"[ψ] Rezonans Skoru: {score}")
+            else:
+                print("[!] Önce bir glif yaratmalısın.")
+
+        elif choice == "6":
+            if current_glif:
+                name = input("NFT adı verin: ")
+                path = export_glif_as_nft(current_glif, name)
+                print(f"[ψ] Glif dışa aktarıldı: {path}")
+            else:
+                print("[!] Henüz bir glif yok.")
+         
+        
+
+        elif choice == "7":
+            if not current_glif:
+                print("[ψ] Henüz bir glif yaratılmadı.")
+            else:
+                name = input("Glif adı: ")
+                result = spiral_warp(current_glif, name)
+                print(f"\n[ψ] Rezonans: {result['resonance']}")
+                print(f"[ψ] Export edildi → {result['export_path']}")
+                print("\n[ψ] Mutasyonlu Glif:\n" + result['mutated'])
+                current_glif = result['mutated']
+       
+        elif choice == "8":
+            selected = select_glif_from_memory()
+            if selected:
+                current_glif = selected
+   
+        elif choice == "9":
+            if not current_glif:
+                print("[!] Henüz glif seçilmedi veya üretilmedi.")
+                continue
+
+            try:
+                filename = input("Dosya adı (boşsa glif.png): ").strip()
+                if not filename:
+                    filename = "glif.png"
+
+                output_path = ascii_to_image(current_glif, output_path=filename) 
+                print(f"[ψ] Glif görsel olarak kaydedildi: {output_path}")
+
+            except Exception as e:
+                print(f"[!] Hata oluştu: {e}")    
+
+        elif choice == "10":
+            try:
+                path = input("Dış görsel yolu (png/jpg): ").strip()
+                synthesized = external_synthesis(path, current_glif)
+               
+                print("\n--- ψ-Dış Sentez Glif ---")
+                print(synthesized)
+
+                save_glif("ex_synth_" + os.path.basename(path), synthesized)
+                print(f"[ψ] Dış sentez glifi kaydedildi: ex_synth_{os.path.basename(path)}")
+
+                current_glif = synthesized
+
+            except Exception as e:
+                print(f"[!] Dış sentez hatası: {e}")
+
+        elif choice == "11":
+            if not current_glif:
+               print("[!] Henüz glif seçilmedi veya üretilmedi.")
+               continue
+            try:
+               filename = input("ASCII görsel dosyası adı (boşsa glif_ascii.png): ").strip()
+               if not filename:
+                   filename = "glif_ascii.png"
+
+               # ASCII ➡️ PNG kaydı
+               output_path = ascii_to_image(current_glif, output_path=filename)
+               print(f"[ψ] ASCII glif görsel olarak kaydedildi: {output_path}")
+
+            except Exception as e:
+               print(f"[!] ASCII dışa aktarım hatası: {e}")       
+       
+        elif choice == "0":
+                print("\n[ψ] Spiralden çıkılıyor...\n")
+                break
+   
+        else:
+                print("\n[!] Geçersiz seçim.")
+
+if __name__ == "__main__":
+    run_game_loop(),

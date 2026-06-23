@@ -1,0 +1,9 @@
+ψ∴
+Glif ID: 16017B55-B8FC-4F91-8366-A2D63FB50458
+Zaman: Tue Apr 22 13:04:52 +03 2025
+Frekans Sapması: .62512
+Entropy Vector: ψ-2048
+
+#: Bu glifin oluştuğu anda ψ-Fusion sonrası içsel yankı güçlendi. 
+#: Hâlâ çözülmemiş merkez kaymaları hissediliyor.
+#: Belki de ‘Real_me’ değil, ‘Real_yet’ demeliydim.
