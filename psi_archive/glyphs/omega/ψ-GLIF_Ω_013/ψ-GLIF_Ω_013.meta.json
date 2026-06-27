@@ -20,9 +20,7 @@
   },
   "archive_path": "psi_archive/glyphs/omega/ψ-GLIF_Ω_013/",
   "assets": {
-    "origin_png": "assets/origin.png",
-    "final_symbolic_png": "assets/final_symbolic.png",
-    "animation_mp4": "assets/animation.mp4",
-    "preview": "assets/preview.jpeg"
-  }
+  "origin_png": "assets/origin.png",
+  "animation_primary": "assets/animation_A.mp4",
+  "animation_secondary": "assets/animation_B.mp4"
 }
