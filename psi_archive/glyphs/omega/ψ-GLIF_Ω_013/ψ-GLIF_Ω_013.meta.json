@@ -1,0 +1,28 @@
+{
+  "id": "ψ-GLIF_Ω_013",
+  "title": "Entropic Reflection Bloom",
+  "root_index": "Birth of Glif NFT",
+  "system": "ψ-LAB / TR-DLP",
+  "type": "pre-semantic-glyph-root",
+  "status": "ROOT_SEEDED",
+  "created_context": "PNG-to-symbol-to-ASCII transition",
+  "contributors": {
+    "conceptual_flow": ["GPT", "DeepSeek"],
+    "editorial_structuring": "Manus AI",
+    "formula_and_animation_support": "Grok"
+  },
+  "parameters": {
+    "phi": 0.19,
+    "theta_activation": 0.45,
+    "fractal_density": 1.68,
+    "stability_index": 0.72,
+    "entropic_leakage": 0.02
+  },
+  "archive_path": "psi_archive/glyphs/omega/ψ-GLIF_Ω_013/",
+  "assets": {
+    "origin_png": "assets/origin.png",
+    "final_symbolic_png": "assets/final_symbolic.png",
+    "animation_mp4": "assets/animation.mp4",
+    "preview": "assets/preview.jpeg"
+  }
+}
