@@ -1,0 +1,25 @@
+{
+  "name": "ψ-GLIF_Ω_013 — Birth of Glif",
+  "description": "First documented emergence of a named glyph structure within the ψ-LAB archive.",
+  "image": "REPLACE_WITH_IPFS_IMAGE",
+  "animation_url": "REPLACE_WITH_IPFS_VIDEO",
+  "external_url": "https://github.com/psi-gylph/psi-glif",
+  "attributes": [
+    {
+      "trait_type": "Series",
+      "value": "GLIF ORIGIN SERIES"
+    },
+    {
+      "trait_type": "Generation",
+      "value": "Ω"
+    },
+    {
+      "trait_type": "Classification",
+      "value": "Entropic Reflection Bloom"
+    },
+    {
+      "trait_type": "Root Node",
+      "value": "TRUE"
+    }
+  ]
+}
