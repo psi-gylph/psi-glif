@@ -96,3 +96,19 @@ def load_all_glifs():
             continue
 
     return glifs
+def update_glif(glif_data: dict):
+    """
+    Var olan glif JSON dosyasını id üzerinden günceller.
+    """
+    glif_id = glif_data.get("id")
+    if not glif_id:
+        print("[ψ-WARN] update_glif: id yok, kayıt yapılamadı.")
+        return False
+
+    os.makedirs(GLIF_DIR, exist_ok=True)
+    file_path = os.path.join(GLIF_DIR, f"{glif_id}.json")
+
+    with open(file_path, "w", encoding="utf-8") as f:
+        json.dump(glif_data, f, ensure_ascii=False, indent=2)
+
+    return True

@@ -20,6 +20,7 @@ sys.path.append(os.path.join(BASE_DIR, "core"))
 from ψ_glif_memory import (
     save_glif,
     load_all_glifs,
+    update_glif,
     GlifIdentity,
     GlifOperationType,
 )
@@ -410,9 +411,15 @@ def cmd_time_cycle():
     if ag is None:
         print("[ψ] Önce bir aktif glif seç.")
         return
+
     print("\n[ψ-time] Zaman döngüsü çalıştırılıyor...")
     result = run_time_cycle(ag)
     print("[ψ-time] Çıktı:", result)
+
+    if isinstance(result, str) and "Φ=0.95" in result:
+        ag["phi_score"] = 0.95
+        update_glif(ag)
+        print("[ψ-time] Aktif glif güncellendi: Φ=0.95")
 
 
 def cmd_value_token():
@@ -434,49 +441,126 @@ def cmd_value_token():
 
 
 def cmd_spiral_ritual():
-    """Mini otomatik run: küçük mutasyon + rezonans + değer raporu."""
+    """
+    Tam Spiral-Warp:
+    aktif glif → mutasyon → sentez adayı → rezonans → ψ-time → değer → kayıt
+    """
     base = _get_active_glif()
     if base is None:
         print("[ψ] Ritüel için önce bir aktif glif seç.")
         return
 
-    print("\n[ψ-Ritüel] Spiral-Warp başlıyor...")
+    print("\n[ψ-Ritüel] Spiral-Warp tam zincir başlıyor...")
 
-    # 1) Mutasyon
     ascii_base = base.get("ascii", "")
-    mutated_ascii = mutate_glif(ascii_base)
-    child_name = (base.get("seed") or base.get("name") or "glif") + "_warp"
+   
+    partners = [
+        g for g in STATE["glifs"]
+        if g.get("id") != base.get("id")
+        and g.get("ascii")
+        and g.get("id") not in base.get("parents", [])
+    ]
 
-    identity = GlifIdentity(seed=child_name, operation=GlifOperationType.RESONANCE)
+    if not partners:
+        print("[ψ] Spiral-Warp için uygun dış partner bulunamadı.")
+        return
+
+    partner = max(
+        partners,
+        key=lambda g: calculate_resonance(base, g)
+    )
+
+    partner_name = partner.get("seed") or partner.get("name") or "partner"
+    print(f"[ψ-Ritüel] Outcross partner: {partner_name}")
+   
+    if not ascii_base:
+        print("[ψ] Aktif glifte ASCII içerik yok.")
+        return
+
+    base_name = base.get("seed") or base.get("name") or "glif"
+
+    # 1) Sentez + Mutasyon
+    cross_ascii = synthesize_glif(ascii_base, partner.get("ascii", ""))
+    mutated_ascii = mutate_glif(cross_ascii)
+   
+    child_name = base_name + "_x_" + partner_name + "_spiral_warp"
+
+    # 2) Entropi + Phi
     ent = entropy_level(mutated_ascii)
     phi = compute_phi_from_entropy(ent)
+
+    # 3) Kimlik oluştur
+    identity = GlifIdentity(
+        seed=child_name,
+        operation=GlifOperationType.RESONANCE
+    )
     identity.entropy_level = ent
     identity.phi_score = phi
-    if "id" in base:
-        identity.parents = [base["id"]]
 
+    if base.get("id"):
+        identity.parents = []
+
+        if base.get("id"):
+            identity.parents.append(base["id"])
+
+        if partner.get("id"):
+            identity.parents.append(partner["id"])
+
+    # 4) Kaydet
     save_glif(mutated_ascii, identity)
     _refresh_glifs()
+
     child = None
     for g in STATE["glifs"]:
         if g.get("id") == identity.id:
             child = g
+            STATE["active_index"] = STATE["glifs"].index(g)
             break
 
-    # 2) Rezonans (base vs child)
+    # 5) Rezonans
     res = calculate_resonance(base, child) if child is not None else 0.0
 
-    # 3) Değer hesapla
-    meta = {"entropy": ent, "phi": phi, "resonance": res}
+    # 6) ψ-time
+    time_result = run_time_cycle(child) if child is not None else "[ψ-time] child yok."
+
+    # 7) Değer / token skoru
+    meta = {
+        "entropy": ent,
+        "phi": phi,
+        "resonance": res
+    }
     val = compute_value_score(meta)
 
-    print("\n[ψ-Ritüel] Sonuç")
+    if child is not None:
+        child["resonance_history"] = child.get("resonance_history", [])
+        child["resonance_history"].append({
+            "parent": base.get("id"),
+            "score": res
+        })
+        child["token_value"] = val
+
+        try:
+            update_glif(child)
+        except NameError:
+            pass
+
+    print("\n[ψ-Ritüel] Tam Zincir Sonuç")
     print("----------------------------------------")
-    print(mutated_ascii)
+    print(f"Base      : {base_name}")
+    print(f"Child     : {child_name}")
+    print(f"Child ID  : {identity.id}")
+    print(f"Φ         : {phi:.2f}")
+    print(f"Entropi   : {ent:.2f}")
+    print(f"Rezonans  : {res:.3f}")
+    print(f"Value     : {val}")
     print("----------------------------------------")
-    print(f"Φ (phi): {phi:.2f} | Entropi: {ent:.2f} | Rezonans: {res:.3f}")
-    print(f"Value score: {val}")
-    print("[ψ-Ritüel] Spiral-Warp tamamlandı.")
+    print("[ψ-time]")
+    print(time_result)
+    print("----------------------------------------")
+    print("[ψ-Ritüel] Spiral-Warp tam zincir tamamlandı.")
+  
+
+
 
 # ============================================================
 #    ANA DÖNGÜ
