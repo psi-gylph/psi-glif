@@ -49,3 +49,9 @@ exported_nfts/
 
 # macOS
 .DS_Store
+
+# ψ_lab local import staging
+imports/
+imported_assets/
+*.bad
+.DS_Store
