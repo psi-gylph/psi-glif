@@ -1,0 +1,19 @@
+{
+  "glyph_id": "ψ-Glif_α-P1",
+  "slug": "psi-glif-alpha-p1",
+  "title": "Resonance Scan",
+  "collection": "GLIF BIRTH RECORD v1",
+  "event_date_claimed": "2025-04-16",
+  "documentation_date": "2026-06-25",
+  "state": "pre-semantic resonance scan",
+  "parameters": {
+    "phi": 0.19,
+    "stability_index": 0.72,
+    "entropic_leakage": 0.02
+  },
+  "publication_note": "Experimental vocabulary; not a validated scientific claim.",
+  "media_policy": {
+    "storage": "external",
+    "repository_copy": false
+  }
+}
