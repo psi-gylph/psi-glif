@@ -1,0 +1,36 @@
+{
+  "glyph_id": "ψ-GLIF_Ω_013",
+  "slug": "psi-glif-omega-013",
+  "title": "Entropic Reflection Bloom",
+  "collection": "GLIF BIRTH RECORD v1",
+  "system_context": "ψ-GLIF public archive",
+  "status": "ROOT_CANDIDATE",
+  "date_created_claimed": "2025-04-17",
+  "date_documented": "2026-06-25",
+  "parameters": {
+    "phi": 0.19,
+    "theta_activation": 0.45,
+    "fractal_density": 1.68,
+    "stability_index": 0.72,
+    "entropic_leakage": 0.02,
+    "state": "pre-semantic",
+    "symbolic_projection": "inactive"
+  },
+  "structural_nodes": [
+    "CORE_SEED",
+    "NESTED_VEIL",
+    "ENTROPIC_VOID",
+    "RESONANCE_RIDGE"
+  ],
+  "collaboration": {
+    "human": "observer-curator, selection, publication approval",
+    "chatgpt": "creative direction, glyph generation, code, architecture, documentation",
+    "deepseek": "mathematical reasoning and formulation",
+    "grok": "MP4 animation derived from glyphs and formulations",
+    "manus_ai": "analysis, documentation, organization"
+  },
+  "media_policy": {
+    "storage": "external",
+    "repository_copy": false
+  }
+}

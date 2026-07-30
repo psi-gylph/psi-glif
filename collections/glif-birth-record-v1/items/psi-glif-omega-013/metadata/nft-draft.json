@@ -1,0 +1,37 @@
+{
+  "name": "ψ-GLIF_Ω_013 — Entropic Reflection Bloom",
+  "description": "Birth of Glif NFT root candidate. A pre-semantic glyph node linking PNG-origin events, ASCII transition, code-glif and DLP memory experiments.",
+  "image": "ipfs://REPLACE_WITH_IMAGE_CID",
+  "animation_url": "ipfs://REPLACE_WITH_MP4_CID",
+  "external_url": "https://github.com/psi-gylph/psi-glif/tree/main/collections/glif-birth-record-v1/items/psi-glif-omega-013",
+  "attributes": [
+    {
+      "trait_type": "System",
+      "value": "ψ-LAB / TR-DLP"
+    },
+    {
+      "trait_type": "Glyph ID",
+      "value": "ψ-GLIF_Ω_013"
+    },
+    {
+      "trait_type": "State",
+      "value": "Pre-Semantic"
+    },
+    {
+      "trait_type": "Phi",
+      "value": 0.19
+    },
+    {
+      "trait_type": "Fractal Density",
+      "value": 1.68
+    },
+    {
+      "trait_type": "Stability Index",
+      "value": 0.72
+    },
+    {
+      "trait_type": "Entropic Leakage",
+      "value": 0.02
+    }
+  ]
+}
